@@ -1,0 +1,58 @@
+#User function Template for python3
+# Title: Number of Provinces
+# Video_Link: https://youtu.be/ACzkVtewUYA
+# Question_Link: https://practice.geeksforgeeks.org/problems/number-of-provinces/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 09_02_2023
+
+
+#User function Template for python3
+
+class Solution:
+    def numProvinces(self, adj, V):
+        # code here 
+        adjMat = [[] for i in range(V)]
+        
+        for i in range(len(adj)):
+            for j in range(len(adj[i])):
+                if(adj[i][j] == 1):
+                    adjMat[i].append(j)
+        # print(adjMat)
+        
+        
+        visited = [-1 for i in range(V)]
+        count = 0
+        
+        for i in range(V):
+            if(visited[i] == -1):
+                count+=1
+                queue = [i]
+                visited[i] = 1
+                while(len(queue)>0):
+                    temp = queue.pop(0)
+                    for i in adjMat[temp]:
+                        if(visited[i] == -1):
+                            visited[i] = 1
+                            queue.append(i)
+        return count
+                            
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__': 
+    t = int (input ())
+    for _ in range (t):
+        V=int(input())
+        adj=[]
+        
+        for i in range(V):
+            temp = list(map(int,input().split()))
+            adj.append(temp);
+        
+        ob = Solution()
+        print(ob.numProvinces(adj,V))
+# } Driver Code Ends
