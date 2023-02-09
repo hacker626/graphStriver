@@ -1,0 +1,72 @@
+#User function Template for python3
+# Title: Flood fill Algorithm
+# Video_Link: https://youtu.be/C-2_uSRli8o
+# Question_Link: https://practice.geeksforgeeks.org/problems/flood-fill-algorithm1856/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 09_02_2023
+
+
+
+
+class Solution:
+	def floodFill(self, image, sr, sc, newColor):
+		#Code here
+		node = image[sr][sc]
+		if(node == newColor):
+		    return image
+        self.dfs(image,sr,sc,newColor,node)
+# 		queue = [[sr-1,sc-1]]
+		
+		
+# 		while(len(queue)>0):
+# 		    temp = queue.pop(0)
+		    
+# 		    image[temp[0]][temp[1]] = newColor
+# 		    rd = [0,0,1,-1]
+# 		    cd = [1,-1,0,0]
+# 		    for i in range(4):
+# 		        nr = temp[0]+rd[i]
+# 		        nc = temp[1]+cd[i]
+		        
+# 		        if(0<=nc<len(image[0]) and 0<=nr<len(image) and image[nr][nc] == 1):
+# 		            queue.append([nr,nc])
+		
+		return image
+	def dfs(self,image,sr,sc,newColor,node):
+	    image[sr][sc] = newColor
+	    
+	    rd = [0,0,1,-1]
+	    cd = [1,-1,0,0]
+	    for i in range(4):
+	        nr = sr+rd[i]
+	        nc = sc+cd[i]
+	        if(0<=nr<len(image) and 0<=nc<len(image[0]) and image[nr][nc] == node):
+	            self.dfs(image,nr,nc,newColor,node)
+		
+
+
+
+#{ 
+ # Driver Code Starts
+import sys
+sys.setrecursionlimit(10**7)
+if __name__ == '__main__':
+
+	T=int(input())
+	for i in range(T):
+		n, m = input().split()
+		n = int(n)
+		m = int(m)
+		image = []
+		for _ in range(n):
+			image.append(list(map(int, input().split())))
+		sr, sc, newColor = input().split()
+		sr = int(sr); sc = int(sc); newColor = int(newColor);
+		obj = Solution()
+		ans = obj.floodFill(image, sr, sc, newColor)
+		for _ in ans:
+			for __ in _:
+				print(__, end = " ")
+			print()
+# } Driver Code Ends
