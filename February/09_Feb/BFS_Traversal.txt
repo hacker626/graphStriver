@@ -1,5 +1,5 @@
 #User function Template for python3
-# Title: DFS of Graph
+# Title: BFS of Graph
 # Video_Link: https://youtu.be/-tgVpUgsQ5k
 # Question_Link: https://practice.geeksforgeeks.org/explore?page=1&category[]=Graph&curated[]=1&status[]=solved&sortBy=submissions&curated_names[]=SDE%20Sheet
 

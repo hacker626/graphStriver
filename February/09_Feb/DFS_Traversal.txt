@@ -1,0 +1,50 @@
+#User function Template for python3
+# Title: DFS of Graph
+# Video_Link: https://youtu.be/Qzf1a--rhp8
+# Question_Link: https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1?page=1&status[]=solved&category[]=Graph&curated[]=1&sortBy=submissions
+
+# Contributed By: Mridul Bhaskar
+# Date: 09_02_2023
+
+
+#User function Template for python3
+
+class Solution:
+    
+    #Function to return a list containing the DFS traversal of the graph.
+    def dfsOfGraph(self, V, adj):
+        # code here
+        visited = [-1 for i in range(V)]
+        res = []
+        self.dfsRec(res,visited,0,adj)
+        return res
+        
+        
+    def dfsRec(self,res,visited,node,adj):
+        if(visited[node] !=-1):
+            return
+        visited[node] = 1
+        res.append(node)
+        for i in adj[node]:
+            if(visited[i] == -1):
+                self.dfsRec(res,visited,i,adj)
+
+
+#{ 
+ # Driver Code Starts
+if __name__ == '__main__':
+    T=int(input())
+    while T>0:
+        V,E=map(int,input().split())
+        adj=[[] for i in range(V+1)]
+        for i in range(E):
+            u,v=map(int,input().split())
+            adj[u].append(v)
+            adj[v].append(u)
+        ob=Solution()
+        ans=ob.dfsOfGraph(V,adj)
+        for i in range(len(ans)):
+            print(ans[i],end=" ")
+        print()
+        T-=1
+# } Driver Code Ends
