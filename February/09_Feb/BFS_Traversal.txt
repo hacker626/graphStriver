@@ -1,0 +1,55 @@
+#User function Template for python3
+# Title: DFS of Graph
+# Video_Link: https://youtu.be/-tgVpUgsQ5k
+# Question_Link: https://practice.geeksforgeeks.org/explore?page=1&category[]=Graph&curated[]=1&status[]=solved&sortBy=submissions&curated_names[]=SDE%20Sheet
+
+
+# Contributed By: Mridul Bhaskar
+# Date: 09_02_2023
+
+
+from typing import List
+from queue import Queue
+class Solution:
+    #Function to return Breadth First Traversal of given graph.
+    def bfsOfGraph(self, V: int, adj: List[List[int]]) -> List[int]:
+        # code here
+        # print(adj)
+        visitedNode = [-1 for i in range(V)]
+        res = []
+        visitedNode[0] = 0
+        queue = [0]
+        
+        while(len(queue)>0):
+            for i in range(len(queue)):
+                temp = queue.pop(0)
+                res.append(temp)
+                for j in adj[temp]:
+                    if(visitedNode[j] == -1):
+                        visitedNode[j] = 1
+                        queue.append(j)
+        return res
+        
+        
+
+
+#{ 
+ # Driver Code Starts
+
+
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		V, E = map(int, input().split())
+		adj = [[] for i in range(V)]
+		for _ in range(E):
+			u, v = map(int, input().split())
+			adj[u].append(v)
+		ob = Solution()
+		ans = ob.bfsOfGraph(V, adj)
+		for i in range(len(ans)):
+		    print(ans[i], end = " ")
+		print()
+        
+
+# } Driver Code Ends
