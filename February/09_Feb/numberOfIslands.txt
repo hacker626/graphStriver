@@ -1,0 +1,63 @@
+
+# Title: Find the number of islands
+# Video_Link: https://youtu.be/muncqlKJrH0 
+# Question_Link: https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 09_02_2023
+
+
+#User function Template for python3
+
+import sys
+sys.setrecursionlimit(10**8)
+class Solution:
+    def numIslands(self,grid):
+        #code here
+        row = len(grid)
+        col = len(grid[0])
+        count = 0
+        # visited = grid[::]
+        for i in range(row):
+            for j in range(col):
+                if(grid[i][j] == 1):
+                    count+=1
+                    # print(i,j)
+                    self.recTraversal(grid,i,j)
+                    # print(visited)
+                    
+        # print(visited)
+        return count
+        
+        
+    def recTraversal(self,grid,row,col):
+        
+        
+        row_dif = [-1,0,1,-1,1,-1,0,1]
+        col_dif = [-1,-1,-1,0,0,1,1,1]
+        for i in range(8):
+            row_new = row+row_dif[i]
+            col_new = col+col_dif[i]
+            
+            if(0<=row_new<len(grid) and 0<=col_new<len(grid[0]) and grid[row_new][col_new] == 1):
+                grid[row_new][col_new] = 0
+                self.recTraversal(grid,row_new,col_new)
+                
+                
+                
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__=="__main__":
+    for _ in range(int(input())):
+        n,m=map(int,input().strip().split())
+        grid=[]
+        for i in range(n):
+            grid.append([int(i) for i in input().strip().split()])
+        obj=Solution()
+        print(obj.numIslands(grid))
+# } Driver Code Ends
