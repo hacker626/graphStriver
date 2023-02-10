@@ -1,0 +1,64 @@
+#User function Template for python3
+# Title: Rotten Oranges
+# Video_Link: https://youtu.be/yf3oUhkvqA0
+# Question_Link: https://practice.geeksforgeeks.org/problems/rotten-oranges2536/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 10_02_2023
+
+TC: O(m*n)
+SC: O(1)
+
+
+class Solution:
+
+    #Function to find minimum time required to rot all oranges. 
+	def orangesRotting(self, grid):
+		#Code here
+		row = len(grid)
+		col = len(grid[0])
+		queue = []
+		for i in range(row):
+		    for j in range(col):
+		        if(grid[i][j] == 2):
+		            queue.append([i,j])
+		
+		counter = 0
+		
+		while(len(queue)>0):
+		    counter += 1
+		    for i in range(len(queue)):
+		        temp = queue.pop(0)
+		        dr = [0,0,1,-1]
+		        dc = [1,-1,0,0]
+		        for i in range(4):
+		            nr = temp[0]+dr[i]
+		            nc = temp[1]+dc[i]
+		            if(0<=nr<row and 0<=nc<col and grid[nr][nc] == 1):
+		                grid[nr][nc] = 2
+		                queue.append([nr,nc])
+        
+		for i in range(row):
+		    for j in range(col):
+		        if(grid[i][j] == 1):
+		            return -1
+	    return counter-1
+
+
+#{ 
+ # Driver Code Starts
+from queue import Queue
+
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		n, m = map(int, input().split())
+		grid = []
+		for _ in range(n):
+			a = list(map(int, input().split()))
+			grid.append(a)
+		obj = Solution()
+		ans = obj.orangesRotting(grid)
+		print(ans)
+
+# } Driver Code Ends
