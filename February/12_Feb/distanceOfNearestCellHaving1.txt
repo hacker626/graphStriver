@@ -1,0 +1,86 @@
+#User function Template for python3
+# Title: Distance of Nearest Cell Having 1
+# Video_Link: https://youtu.be/edXdVwkYHF8
+# Question_Link: https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 12_02_2023
+
+TC: O(m*n)
+SC: O(m*n)
+
+Partial TestCase Passed [23/90]   [TLE Caused]
+
+
+
+
+
+class Solution:
+
+    #Function to find distance of nearest 1 in the grid for each cell.
+	def nearest(self, grid):
+		#Code here
+		
+		
+		row = len(grid)
+		col = len(grid[0])
+		loc_1 = []
+		
+		for i in range(len(grid)):
+		    for j in range(len(grid[0])):
+		        if(grid[i][j] == 1):
+		            loc_1.append([i,j])
+        queue = loc_1[::]
+        count = 0
+        while(len(queue)>0):
+            count+=1
+            for i in range(len(queue)):
+                
+                temp = queue.pop(0)
+                
+                dr = [0,0,-1,1]
+                dc = [1,-1,0,0]
+                
+                for i in range(4):
+                    nr = dr[i]+temp[0]
+                    nc = dc[i]+temp[1]
+                    
+                    if(0<=nr<row and 0<=nc<col and grid[nr][nc] == 0):
+                        if(count != 1):
+                            grid[nr][nc] = grid[temp[0]][temp[1]]+1
+                        else:
+                            grid[nr][nc] = 1
+                        queue.append([nr,nc])
+        for i in loc_1:
+            grid[i[0]][i[1]] = 0
+        return grid
+        
+        
+		
+		
+
+
+#{ 
+ # Driver Code Starts
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		n, m = map(int, input().split())
+		grid = []
+		for _ in range(n):
+			a = list(map(int, input().split()))
+			grid.append(a)
+		obj = Solution()
+		ans = obj.nearest(grid)
+		for i in ans:
+			for j in i:
+				print(j, end = " ")
+			print()
+
+# } Driver Code Ends
+
+
+
+
+
+
