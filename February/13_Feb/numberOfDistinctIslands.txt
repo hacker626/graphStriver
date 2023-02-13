@@ -1,0 +1,77 @@
+#User function Template for python3
+# Title: Number of Distinct Islands
+# Video_Link: https://youtu.be/7zmgQSJghpo
+# Question_Link: https://practice.geeksforgeeks.org/problems/number-of-distinct-islands/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 13_02_2023
+
+TC: O(m*n)
+SC: O(m*n)
+
+
+
+#User function Template for python3
+
+import sys
+from typing import List
+sys.setrecursionlimit(10**8)
+class Solution:
+    def countDistinctIslands(self, grid : List[List[int]]) -> int:
+        # code here
+        
+        
+        dict_ = {}
+        row,col = len(grid),len(grid[0])
+        visited = [[-1 for i in range(col)] for j in range(row)]
+        
+        
+        for i in range(row):
+            for j in range(col):
+                if(visited[i][j] == -1 and grid[i][j] == 1):
+                    queue = [[i,j]]
+                    ans = []
+                    while(len(queue)>0):
+                        temp = queue.pop(0)
+                        ans.append([i-temp[0],j-temp[1]])
+                        visited[temp[0]][temp[1]] = 1
+                        dr = [0,0,-1,1]
+                        dc = [1,-1,0,0]
+                        
+                        for k in range(4):
+                            nr = temp[0]+dr[k]
+                            nc = temp[1]+dc[k]
+                            
+                            if(0<=nr<row and 0<=nc<col and visited[nr][nc] == -1 and grid[nr][nc] == 1):
+                                queue.append([nr,nc])
+                                visited[nr][nc] = 1
+                    # print(ans)
+                    ans = "".join("".join(str(i) for i in i) for i in ans)
+                    if(ans not in dict_):
+                        dict_[ans] = 1
+        # print(dict_)
+        return len(dict_)
+                                
+                        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__=="__main__":
+    for _ in range(int(input())):
+        n,m=map(int,input().strip().split())
+        grid=[]
+        for i in range(n):
+            grid.append([int(i) for i in input().strip().split()])
+        obj=Solution()
+        print(obj.countDistinctIslands(grid))
+# } Driver Code Ends
+
+
+
+
+
+
+
