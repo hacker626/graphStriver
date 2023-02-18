@@ -1,0 +1,76 @@
+#User function Template for python3
+# Title: Bipartite Graph [BFS]
+# Video_Link: https://youtu.be/-vu34sct1g8
+# Question_Link: https://practice.geeksforgeeks.org/problems/bipartite-graph/1
+
+# Contributed By: Mridul Bhaskar
+# Date: 18_02_2023
+
+TC: O(V+E)
+SC: O(V)
+
+
+
+
+
+class Solution:
+	def isBipartite(self, V, adj):
+		#code here
+		
+		visited = [-1 for i in range(V)]
+		for i in range(V):
+		    if(visited[i] == -1):
+		        
+        		queue = [i]
+                visited[i] = 1
+                
+                while(len(queue)>0):
+                    temp = queue.pop(0)
+                    
+                    for k in adj[temp]:
+                        if(visited[k] == -1):
+                            queue.append(k)
+                            # color the child node with opposite color that of parent
+                            if(visited[temp] == 1):
+                                visited[k] = 2
+                            elif(visited[temp] == 2):
+                                visited[k] = 1
+                        # if child node is already visited check whether the adjacent node are same color
+                        elif((visited[k] == 2 and visited[temp] == 2) or (visited[k] == 1 and visited[temp] == 1)):
+                            # print(visited,k,temp)
+                            return 0
+                        # print(visited)
+        return 1
+                        
+		                
+		                
+
+
+
+#{ 
+ # Driver Code Starts
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		V, E = map(int, input().strip().split())
+		adj = [[] for i in range(V)]
+		for i in range(E):
+			u, v = map(int, input().strip().split())
+			adj[u].append(v)
+			adj[v].append(u)
+		obj = Solution()
+		ans = obj.isBipartite(V, adj)
+		if(ans):
+			print("1")
+		else:
+			print("0")
+
+# } Driver Code Ends
+
+
+
+
+
+
+
+
